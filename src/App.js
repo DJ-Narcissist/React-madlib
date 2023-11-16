@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AdjectiveForm from './AdjectiveForm';
+import NounForm from './NounForm';
+import VerbForm from './VerbForm';
 
 function App() {
+  const [adjective, setAdjective] = useState('');
+  const [noun, setNoun] = useState('');
+  const [verb, setVerb] = useState('');
+
+  const handleAdjectiveSubmit = (adjective) => {
+    setAdjective(adjective);
+  };
+
+  const handleNounSubmit = (noun) => {
+    setNoun(noun);
+  };
+
+  const handleVerbSubmit = (verb) => {
+    setVerb(verb);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AdjectiveForm onSubmit={handleAdjectiveSubmit} />
+      <NounForm onSubmit={handleNounSubmit} />
+      <VerbForm onSubmit={handleVerbSubmit} />
+
+      {/* Display the Mad Lib using the collected words */}
+      <h2>Your Mad Lib:</h2>
+      <p>{`Once upon a time, there was a ${adjective} ${noun} who loved to ${verb} all day.`}</p>
     </div>
   );
 }
